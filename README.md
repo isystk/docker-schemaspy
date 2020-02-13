@@ -54,9 +54,7 @@ Options:
   init                     Dockerコンテナ・イメージ・生成ファイルの状態を初期化します。
   start                    すべてのDaemonを起動します。
   stop                     すべてのDaemonを停止します。
-  mysql start              MySQLを起動します。
-  mysql stop               MySQLを停止します。
-  mysql restart            MySQLを再起動します。
+  mysql login              MySQLデータベースにログインします。
   schemaspy                schemaspyを実行します。
   --version, -v     バージョンを表示します。
   --help, -h        ヘルプを表示します。

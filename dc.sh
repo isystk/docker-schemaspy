@@ -17,9 +17,7 @@ Options:
   init                     Dockerコンテナ・イメージ・生成ファイルの状態を初期化します。
   start                    すべてのDaemonを起動します。
   stop                     すべてのDaemonを停止します。
-  mysql start              MySQLを起動します。
-  mysql stop               MySQLを停止します。
-  mysql restart            MySQLを再起動します。
+  mysql login              MySQLデータベースにログインします。
   schemaspy                schemaspyを実行します。
   --version, -v     バージョンを表示します。
   --help, -h        ヘルプを表示します。
@@ -51,34 +49,8 @@ case ${1} in
         docker-compose stop && docker-compose rm -fv
     ;;
 
-    apache)
-      case ${2} in
-          start)
-              docker-compose up -d apache
-          ;;
-          stop)
-              docker-compose stop apache && docker-compose rm -fv apache
-          ;;
-          restart)
-              ${0} ${1} stop && ${0} ${1} start
-          ;;
-          *)
-              usage
-          ;;
-      esac
-    ;;
-
     mysql)
       case ${2} in
-          start)
-              docker-compose up -d mysql
-          ;;
-          stop)
-              docker-compose stop mysql && docker-compose rm -fv mysql
-          ;;
-          restart)
-              ${0} ${1} stop && ${0} ${1} start
-          ;;
           login)
               mysql -u root -ppassword -h 127.0.0.1  
           ;;
