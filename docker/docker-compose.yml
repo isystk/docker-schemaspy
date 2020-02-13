@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  
+  apache:
+    image: ${PROJECT_NAME}/apache
+    build:
+      context: "./apache"
+      dockerfile: "Dockerfile"
+    ports:
+     - "80:80"
+     - "443:443"
+    restart: always
+    volumes:
+     - ./apache/conf.d:/etc/apache2/conf.d
+     - ./apache/ssl:/etc/apache2/ssl
+     - ./apache/logs:/var/log/apache2
+     - ../public:/var/www/html
+
+  mysql:
+    image: ${PROJECT_NAME}/mysql
+    build:
+      context: "./mysql"
+      dockerfile: "Dockerfile"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+     - "3306:3306"
+    restart: always
+    volumes:
+     - ./mysql/conf.d:/etc/mysql/conf.d
+     - ./mysql/data:/var/lib/mysql
+     - ./mysql/logs:/var/log/mysql
+
+  schemaspy:
+    image: ${PROJECT_NAME}/schemaspy
+    container_name: schemaspy
+    build:
+      context: "./schemaspy"
+      dockerfile: "Dockerfile"
+    volumes:
+      - ../public:/var/www/html:rw
+      - ./schemaspy/conf/schemaspy.properties:/app/schemaspy.properties:ro
+    environment:
+      - LANG=ja_JP.UTF-8
+      - TZ=Asia/Tokyo
+    working_dir: "/app"
+    command: "java -jar schemaspy.jar"
+

@@ -1,0 +1,10 @@
+.DS_Store
+.history
+*.log
+!.gitkeep
+
+# mysql
+mysql/data
+
+# schemaspy
+schemaspy/html
