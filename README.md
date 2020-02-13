@@ -18,7 +18,9 @@ Dockerでschemaspyを起動してデータベース内のER図を参照するサ
 │   │   ├── init （mysqlの初期DDL）
 │   │   ├── logs （mysqlのログ）
 │   │   └── script （mysql関連のスクリプト）
-│   └── schemaspy
+│   ├── schemaspy
+│   ├── .env
+│   └── docker-compose.yml
 ├── public （ER図が出力されるディレクトリ）
 └── dc.sh （Dockerの起動用スクリプト）
 ```
